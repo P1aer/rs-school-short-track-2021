@@ -21,8 +21,51 @@
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new Error('Not implemented');
+
+function minesweeper(matrix) {
+  const res = [];
+  for (let i = 0; i < matrix.length; i++) {
+    const arr = [];
+    for (let j = 0; j < matrix[i].length; j++) {
+      let num = 0;
+      // лево
+      if (j !== 0 && matrix[i][j - 1] === true) {
+        num++;
+      }
+      // справа
+      if (j !== (matrix.length - 1) && matrix[i][j + 1] === true) {
+        num++;
+      }
+      // верх
+      if (i !== 0 && matrix[i - 1][j] === true) {
+        num++;
+      }
+      // низ
+      if (i !== (matrix.length - 1) && matrix[i + 1][j] === true) {
+        num++;
+      }
+      // правый-верхний угол
+      if (j !== (matrix.length - 1) && i !== 0 && matrix[i - 1][j + 1] === true) {
+        num++;
+      }
+      // правый-нижний угол
+      // eslint-disable-next-line max-len
+      if (i !== (matrix.length - 1) && j !== (matrix[i].length - 1) && matrix[i + 1][j + 1] === true) {
+        num++;
+      }
+      // левый-верний угол
+      if (i !== 0 && j !== 0 && matrix[i - 1][j - 1] === true) {
+        num++;
+      }
+      // левый-нижний угол
+      if (i !== (matrix.length - 1) && j !== 0 && matrix[i + 1][j - 1] === true) {
+        num++;
+      }
+      arr.push(num);
+    }
+    res.push(arr);
+  }
+  return res;
 }
 
 module.exports = minesweeper;
